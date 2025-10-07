@@ -2,7 +2,6 @@
 import os
 import paramiko
 import hashlib
-import sys
 import argparse
 
 client = paramiko.SSHClient()
