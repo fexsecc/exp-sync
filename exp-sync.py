@@ -49,7 +49,7 @@ def main():
     prev_time = get_time(args.path)
 
     while True:
-        time.sleep(0.1)
+        time.sleep(0.6)
         t = get_time(args.path)
         if t != prev_time:
             sync(sftp)
