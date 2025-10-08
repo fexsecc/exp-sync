@@ -43,14 +43,12 @@ def main():
 
     # Sync once for starters
     sync(sftp)
-    # Busy loop to check if file changed 
-    # https://stackoverflow.com/questions/28057308/check-if-a-file-is-modified-in-python#74497600
-    get_time = lambda f: os.stat(f).st_ctime
-    prev_time = get_time(args.path)
 
+    # Busy loop to check if file changed 
+    prev_time = os.path.getmtime(args.path)
     while True:
-        time.sleep(0.6)
-        t = get_time(args.path)
+        time.sleep(0.2)
+        t = os.path.getmtime(args.path)
         if t != prev_time:
             sync(sftp)
             prev_time = t
