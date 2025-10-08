@@ -47,12 +47,13 @@ def main():
     # Busy loop to check if file changed 
     prev_time = os.path.getmtime(args.path)
     while True:
-        time.sleep(0.2)
-        t = os.path.getmtime(args.path)
-        if t != prev_time:
-            sync(sftp)
-            prev_time = t
-
+        try:
+            t = os.path.getmtime(args.path)
+            if t != prev_time:
+                sync(sftp)
+                prev_time = t
+        except FileNotFoundError:
+            time.sleep(0.2)
 
 if __name__ == '__main__':
     main()
